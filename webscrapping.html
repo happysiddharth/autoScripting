@@ -1,0 +1,67 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+
+</script>
+<script type="text/javascript">
+    window.onload = function() {
+        $.ajax({
+            method: 'get',
+            data: {
+            },
+            url: '/xyz/signup/',
+            success: function(v) {
+                document.body.innerHTML = v;
+                //replace this with your fileds
+                var firstname = document.querySelector('input[id=_userFirstName]');
+                var lastname = document.querySelector('input[id=_userLastName]');
+                var profession = document.querySelector('select[name=uProfession]');
+                var password = document.getElementById('_userPassword');
+                var Confirmpassword = document.getElementById('userConformPassword');
+                var email = document.getElementById('_userEmail');
+                var mobile = document.getElementById('userMobile');
+                var sec = document.querySelector('select[name=_security]');
+                var securityAnswer = document.getElementById('_answer');
+                var checkBox = document.getElementById('_termAndCon');
+                setInterval(function() {
+                    function stringGen(len, num) {
+                        var text = "";
+                        var alpha = "abcdefghijklmnopqrstuvwxyz";
+                        var alnum = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+                        for (var i = 0; i < len; i++) {
+                            if (!num)
+                                text += alnum.charAt(Math.floor(Math.random() * alnum.length));
+                            else
+                                text += alpha.charAt(Math.floor(Math.random() * alpha.length));
+                        }
+                        return text;
+                    }
+                    //ajax request on the page where data is send
+                    $.ajax({
+                        method: 'POST',
+                        url: 'php/formActionPage.php', //replace it with your action page
+                        data: {
+                            '_newFirstUserName': Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
+                            '_newUserLastName': Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
+                            'uProfession': 'x1x2x3',
+                            '_password': Math.floor(Math.random() * (99999999 - 1 + 99999)) + 999999,
+                            '_newUserEmail': stringGen(10) + "@" + stringGen(5) + "." + stringGen(3, true),
+                            '_newUsermobile': Math.floor(Math.random() * (9999999999 - 1 + 999999)) + 999999,
+                            '_security': 'firstSchool',
+                            'securityAns': 'siddharth',
+                            'termConditions': '',
+                            '_zxcvbnm': '::1'
+                        },
+                        success: function(val) {
+                        },
+                        complete:function(){                                    
+                            console.log('Done');
+                        }
+                    });
+
+                }, 100);
+            }
+        })
+    }
+
+</script>
