@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create New Account</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var mainDiv = document.createElement('div');
+            var form = document.createElement('form');
+            form.setAttribute('action', '#');
+            form.setAttribute('method', 'POST');
+            
+            //style the form
+            form.style.height="300px"; 
+            form.style.width="400px"; 
+            form.style.borderRadius="3px"; 
+            form.style.border="1px solid gray"; 
+            form.style.position="relative"; 
+            form.style.marginLeft="35%"; 
+            form.style.marginTop="10%"; 
+            
+            var fieldset = document.createElement('fieldset');
+            fieldset.style.position='relative';
+            fieldset.style.marginTop='15%';
+            
+            var legend = document.createElement('legend');
+            legend.innerHTML='Create new account';
+            
+            var nameInput = document.createElement('input');
+            nameInput.setAttribute('type', 'name');
+            nameInput.setAttribute('placeholder', 'FULL NAME');
+            nameInput.setAttribute('required', 'true');
+            nameInput.setAttribute('spellcheck', 'on');
+            nameInput.setAttribute('autocomplete', 'true');
+            
+            //style name input field
+            nameInput.style.width='100%';
+            nameInput.style.height='40px';
+            nameInput.style.borderRadius='2px';
+            nameInput.style.boxSizing=' border-box';
+            nameInput.style.paddingLeft='5px';
+            nameInput.style.border='1px solid black';
+
+            var emailInput = document.createElement('input');
+            emailInput.setAttribute('type', 'email');
+            emailInput.setAttribute('placeholder', 'EMAIL');
+            emailInput.setAttribute('autocomplete', 'on');
+            emailInput.setAttribute('required', 'true');
+
+            emailInput.style.width='100%';
+            emailInput.style.height='40px';
+            emailInput.style.borderRadius='2px';
+            emailInput.style.boxSizing=' border-box';
+            emailInput.style.paddingLeft='5px';
+            emailInput.style.border='1px solid black';
+            emailInput.style.marginTop='5px';
+            
+            var submitButton = document.createElement('input');
+            submitButton.setAttribute('type', 'button');
+            submitButton.setAttribute('value', 'CREATE ACCOUNT');
+            
+            submitButton.style.width='100%';
+            submitButton.style.height='40px';
+            submitButton.style.borderRadius='2px';
+            submitButton.style.boxSizing=' border-box';
+            submitButton.style.paddingLeft='5px';
+            submitButton.style.border='1px solid black';
+            submitButton.style.marginTop='5px';
+
+            submitButton.onclick = function(e) {
+                const nameField=Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+                const emailField=Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
+                $.ajax({
+                    async: true,
+                    method: 'POST',
+                    url:'namePageName.php',
+                    data: {
+                      nameField:nameInput.value,
+                      emailField:emailInput.value
+                    },
+                    success: function(val) {
+
+                    },
+                    complete: function() {
+
+                    }
+
+                })            
+            }
+            
+            form.appendChild(fieldset);
+            fieldset.appendChild(legend);
+            fieldset.appendChild(nameInput);
+            fieldset.appendChild(emailInput);
+            fieldset.appendChild(submitButton);
+            
+            document.body.appendChild(form);
+            
+        })
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
